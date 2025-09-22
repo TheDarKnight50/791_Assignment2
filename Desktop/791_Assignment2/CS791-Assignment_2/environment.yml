@@ -1,0 +1,13 @@
+name: ddpm_final
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.7
+  - tqdm
+  - nomkl
