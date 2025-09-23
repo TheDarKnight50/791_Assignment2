@@ -534,7 +534,7 @@ def train(model, train_loader, run_name, learning_rate, epochs, num_steps, devic
             images = images.to(device)
             current_batch_size = images.shape[0]
             t = torch.randint(0, num_steps, (current_batch_size,), device=device).long()
-            scheduler = NoiseSchedulerDDPM(num_timesteps=num_steps, schedule_type='cosine', device=device)
+            scheduler = NoiseSchedulerDDPM(num_timesteps=num_steps, schedule_type='linear', device=device)
             noisy_images, noise = scheduler.add_noise(images, t)
             predicted_noise = model(noisy_images, t)
             loss = F.mse_loss(predicted_noise, noise)

@@ -96,7 +96,7 @@ def train(model, train_loader, run_name, learning_rate, epochs, num_steps, devic
             images, labels = images.to(device), labels.to(device)
             current_batch_size = images.shape[0]
             t = torch.randint(0, num_steps, (current_batch_size,), device=device).long()
-            scheduler = NoiseSchedulerDDPM(num_timesteps=num_steps, schedule_type='cosine', device=device)
+            scheduler = NoiseSchedulerDDPM(num_timesteps=num_steps, schedule_type='linear', device=device)
             noisy_images, noise = scheduler.add_noise(images, t)
             
             # Pass the labels to the model

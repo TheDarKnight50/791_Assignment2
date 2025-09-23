@@ -25,7 +25,7 @@ def train(model, train_loader, run_name, learning_rate, epochs, num_steps, devic
         for images, labels in progress_bar:
             images, labels = images.to(device), labels.to(device)
             t = torch.randint(0, num_steps, (images.shape[0],), device=device).long()
-            scheduler = NoiseSchedulerDDPM(num_timesteps=num_steps, schedule_type='cosine', device=device)
+            scheduler = NoiseSchedulerDDPM(num_timesteps=num_steps, schedule_type='linear', device=device)
             noisy_images, noise = scheduler.add_noise(images, t)
             predicted_noise = model(noisy_images, t, labels)
             loss = F.mse_loss(predicted_noise, noise)
