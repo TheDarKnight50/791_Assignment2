@@ -64,8 +64,12 @@ if __name__ == "__main__":
 
     # 2. LOAD THE TRAINED MODEL
     print(f"Loading trained model from: {args.model_path}")
-    model = DDPM(in_channels=1, num_classes=10).to(device)
-    model.load_state_dict(torch.load(args.model_path, map_location=device))
+    model = DDPM(in_channels=1).to(device)
+    # model.load_state_dict(torch.load(args.model_path, map_location=device))
+    model.load_state_dict(
+    torch.load(args.model_path, map_location=device),
+    strict=False
+)
 
     # 3. GENERATE SAMPLES
     print(f"Generating {args.num_samples} samples...")
